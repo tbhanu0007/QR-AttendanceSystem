@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR CODE</title>
+  <link rel="stylesheet" href="/css/qrcode.css" type="text/css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="details">
+      <h3><%=program%></h3>
+      <h3>Section: <%=section%></h3>
+      <h3><%=course_id%></h3>
+    </div>
+
+    <div class="qrimg">
+      <h4 style="text-align: center;">Scan this QR code:</h4>
+      <img class="qrcode" src=<%=qrurl%>  alt="secret image"/>
+    </div>
+    
+    <div class="actions">
+      <button id="logout" onclick="logout()">Logout</button>
+      <button id="recordQR" onclick="saveQR()">Save QR</button>
+    </div>
+
+  </div>
+
+    <script>
+      function logout(){
+        fetch('/logout' , {method:'POST'})
+        .then(response => {
+          if(response.ok){
+            location.href ='/';
+          }else{
+            alert('Logout failed!');
+          }
+        })
+      };
+
+      function saveQR(){
+        fetch('/saveQR',{method:'POST'})
+        .then(response => {
+          if(response.ok){
+            alert('CLASS MARKED!')
+          }else{
+            alert('CLASS IS NOT MARKED!')
+          }
+        })
+        .catch(error => {
+          console.error('Fetch error:', error);
+          alert('An error occurred while marking the class.')
+        })
+      };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/home.css" type="text/css">
+</head>
+
+<body>
+
+    <div class="login-form">
+        <select id="userTypeSelect">
+            <option value="student" selected>Student</option>
+            <option value="admin">Admin</option>
+        </select>
+        <form action="/admin-panel" method="post" id="adminForm" class="admin-login hidden">
+
+            <h2>Sign in to your account:</h2>
+            <input type="hidden" name="userType" value="admin">
+
+            <input type="text" name="Id" placeholder="Id" required><br>
+            <input type="password" name="password" placeholder="password" required><br><br>
+
+            <div class="buttons">
+                <input class="btn btn-primary" type="submit" value="Submit">
+
+                <button type="button" class="register-button" onclick="register_func()">Register</button>
+
+            </div>
+
+        </form>
+
+        <form action="/studentDashboard" method="post" id="studentForm" class="student-login">
+
+            <h2>Sign in to your account:</h2>
+            <input type="hidden" name="userType" value="student">
+
+            <input type="text" name="admissionNo" placeholder="Admission Number" required><br>
+            <input type="password" name="password" placeholder="password" required><br><br>
+
+            <div class="buttons">
+                <input class="btn btn-primary" type="submit" value="Submit">
+
+                <button type="button" class="register-button" onclick="register_func()">Register</button>
+
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('userTypeSelect').addEventListener('change', function () {
+            var userType = this.value;
+            if (userType === 'student') {
+                document.getElementById('studentForm').classList.remove('hidden');
+                document.getElementById('adminForm').classList.add('hidden');
+            } else if (userType === 'admin') {
+                document.getElementById('studentForm').classList.add('hidden');
+                document.getElementById('adminForm').classList.remove('hidden');
+            }
+        });
+
+        function register_func() {
+            location.href = "register"
+        }
+    </script>
+
+</body>
+
+
+</html>

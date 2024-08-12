@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Attendance</title>
+    <link rel="stylesheet" href="/css/attendanceRecords.css" type="text/css">
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="details">
+            <h3>Attendance Record</h3>
+            <h3>Section: <%=section%>
+            </h3>
+            <h3>Course ID: <%=course_id%>
+            </h3>
+        </div>
+
+        <h4 style="text-align: right;">Total classes: <%=totalClasses%></h4>
+
+        <div class="records">
+            <table id="attendanceTable">
+                <thead>
+                    <tr>
+                        <th>Admission Number</th>
+                        <th>Attended</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% records.forEach((record)=> { %>
+                        <tr>
+                            <td>
+                                <%=record.AdmissionNo%>
+                            </td>
+                            <td>
+                                <%=record.count%>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions">
+            <button id="logoutButton" onclick="logout()">Logout</button>
+        </div>
+
+    </div>
+
+    <script>
+        function logout(){
+            fetch('/logout',{
+                method:'POST'          
+            }).then(response =>{
+                if(response.ok){
+                    location.href='/'
+                }else{
+                    alert('Logout failed')
+                }
+            })
+        }
+    </script>
+
+</body>
+
+</html>

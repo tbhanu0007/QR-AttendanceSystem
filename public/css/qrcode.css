@@ -1,0 +1,44 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: black;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 10px;
+
+}
+
+.details{
+    display:flex;
+    justify-content: space-between;
+    margin:3px;
+}
+
+.qrcode {
+    width: 300px;
+    border-radius: 4px;
+}
+
+.actions{
+    display: flex;
+    justify-content:space-evenly;
+}
+
+button {
+    padding: 10px 17px;
+    margin-top: 1rem;
+    font-size: 1rem;
+    background: #eee;
+    border: 1px solid #333;
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+

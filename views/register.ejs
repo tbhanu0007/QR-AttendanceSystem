@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account</title>
+  <link rel="stylesheet" href="/css/register.css" type="text/css">
+
+</head>
+
+<body>
+  <div class="register-form">
+    <h3>Create account:</h3>
+    <select id="userTypeSelect">
+      <option value="student" selected>Student</option>
+      <option value="admin" >Admin</option>
+    </select>
+
+    <div  id="studentForm">
+      <form action="/register" method="POST">
+        <div class="input-group">
+          <input type="hidden" name="userType" value="student">
+          <input type="text" name="program" placeholder="Program Name" required><br>
+          <select id="section" name="section">
+            <option value="">--Select a section--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select><br>
+          <input type="text" name="admissionNumber" placeholder="Admission Number" required><br>
+          <input type="text" name="name" placeholder="Name" required><br>
+          <input type="password" name="password" placeholder="Password" required><br>
+          <input class="btn btn-primary" type="submit" value="Sign Up">
+          <a class="back-login" href="/" role="button">Login</a>
+
+        </div>
+      </form>
+    </div>
+
+    <div class="hidden" id="adminForm">
+      <form action="/register" method="POST">
+
+        <div class="input-group">
+          <input type="hidden" name="userType" value="admin">
+          <input type="text" name="program" placeholder="Program Name" required><br>
+          <input type="text" name="Id" placeholder="Id" required><br>
+          <input type="password" name="password" placeholder="Password" required><br>
+          <input class="btn btn-primary" type="submit" value="Sign Up">
+          <a class="back-login" href="/" >Login</a>
+        </div>
+
+      </form>
+    </div>
+
+    <script>
+      document.getElementById('userTypeSelect').addEventListener('change', function () {
+        var userType = this.value;
+        if (userType === 'student') {
+          document.getElementById('studentForm').classList.remove('hidden');
+          document.getElementById('adminForm').classList.add('hidden');
+        } else if (userType === 'admin') {
+          document.getElementById('studentForm').classList.add('hidden');
+          document.getElementById('adminForm').classList.remove('hidden');
+        }
+      });
+    </script>
+</body>
+
+</html>

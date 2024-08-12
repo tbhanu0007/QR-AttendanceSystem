@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/student_dashboard.css" type="text/css">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-info">
+            <h4>Hello <%= profile.name %>!</h4>
+            <h4>
+                <%= profile.program %>
+            </h4>
+            <h4>Section: <%= profile.section %>
+            </h4>
+        </div>
+        <div class="admission-info">
+            <h4>Admission Number: &nbsp;</h4>
+            <h4>
+                <%= profile.admissionNo %>
+            </h4>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr style="height: 50px;">
+                    <th>Sr No</th>
+                    <th>Course Name</th>
+                    <th>Course Id</th>
+                    <th>Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < courses.length; i++){ %>
+                    <tr style="height: 40px;">
+                        <td>
+                            <%= i+1 %>
+                        </td>
+                        <td>
+                            <%=courses[i].courseName%>
+                        </td>
+                        <td>
+                            <%=courses[i].courseId%>
+                        </td>
+                        <td>
+                           <%=attendance[courses[i].courseId]%>/<%=totalClasses[courses[i].courseId]%>
+                        </td>
+
+                    </tr>
+                    <%}%>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="actions">
+        <button id="scanButton">Scan</button>
+        <button id="logoutButton">Logout</button>
+
+    </div>
+    
+    <div id="videoContainer" width="300px"></div>
+    <div id="resultScan"></div>
+
+    <script>
+        document.getElementById('scanButton').addEventListener('click', function () {
+            let Scanner = new Html5QrcodeScanner("videoContainer",
+                {
+                    fps: 10,
+                    qrbox: { width: 250, height: 250 }
+                },
+  /* verbose= */ false);
+
+            function onScanSuccess(result) {
+                // handle the scanned code as you like, for example:
+                <!-- console.log(`Code matched = `, result); -->
+                document.getElementById("resultScan").innerHTML = `<a href="${result}">${result}</a>`;
+
+                Scanner.clear();
+                document.getElementById("videoContainer").remove();
+                var myForm = document.createElement("form");
+                myForm.action = result;// the href of the link
+                myForm.method = "POST";
+
+                document.body.appendChild(myForm);
+                myForm.submit();
+                
+            }
+
+            function onScanFailure(error) {
+                // handle scan failure, usually better to ignore and keep scanning.
+                console.warn(`Code scan error = ${error}`);
+            }
+            Scanner.render(onScanSuccess, onScanFailure);
+        });
+
+        document.getElementById('logoutButton').addEventListener('click',function(){
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+              .then(response => {
+                if (response.ok) {
+                  window.location.href = '/';
+                } else {
+                  alert('Logout failed.');
+                }
+        })
+    })
+    </script>
+</body>
+</html>

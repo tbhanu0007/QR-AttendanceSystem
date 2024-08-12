@@ -1,0 +1,86 @@
+body {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.table-container,
+.profile-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.profile-info,
+.admission-info {
+    display: flex;
+    align-items: center;
+}
+
+.profile-info h4,
+.admission-info h4 {
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    /* Remove default margins */
+}
+
+.profile-info h4:not(:last-child) {
+    margin-right: 10px;
+    /* Adjust spacing between elements in profile-info */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: rgba(118, 119, 119, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.33);
+    padding: 8px;
+    text-align: center;
+}
+
+td {
+    border: 1px solid rgba(0, 0, 0, 0.174);
+    padding: 8px;
+    text-align: center;
+}
+
+.actions {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #1e74c9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:first-child {
+    margin-right: 85%;
+}
+
+
+
+button:hover {
+    background-color: #047dff;
+}
